@@ -10,4 +10,26 @@ metadata = MetaData(naming_convention={
 
 db = SQLAlchemy(metadata=metadata)
 
-# write your models here!
+class User(db.model, SerializerMixin):
+    __tablename__ = 'users_table'
+
+    id = db.Column(db.Integer, primary_key=True)
+    username = db.Column(db.String)
+    email_address = db.Column(db.String)
+    password= db.Column(db.String)
+    phone_number = db.Column(db.String)
+
+class Cart(db.model, SerializerMixin):
+    __tablename__ = 'carts_table'
+
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('users_table.id'))
+
+class Item(db.Model):
+    __tablename__ = 'items_table'
+
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String)
+    description = db.Column(db.String)
+    user_id = db.Column(db.Integer, db.ForeignKey('users_table.id'))
+    cart_id = db.Column(db.Integer, db.ForeignKey('carts_table.id'))
