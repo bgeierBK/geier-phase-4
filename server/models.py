@@ -19,17 +19,30 @@ class User(db.model, SerializerMixin):
     password= db.Column(db.String)
     phone_number = db.Column(db.String)
 
+    cart = db.relationship('Cart', back_populates="user")
+    items = db.relationship('Item', back_populates="user")
+
+    
+    
+
 class Cart(db.model, SerializerMixin):
     __tablename__ = 'carts_table'
 
     id = db.Column(db.Integer, primary_key=True)
-    user_id = db.Column(db.Integer, db.ForeignKey('users_table.id'))
+    cart_user_id = db.Column(db.Integer, db.ForeignKey('users_table.id'))
+    
+    items = db.relationship('Item', back_populates = 'cart')
+    user = db.relationship('User', back_populates = 'cart')
 
-class Item(db.Model):
+
+class Item(db.Model, SerializerMixin):
     __tablename__ = 'items_table'
 
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String)
     description = db.Column(db.String)
-    user_id = db.Column(db.Integer, db.ForeignKey('users_table.id'))
-    cart_id = db.Column(db.Integer, db.ForeignKey('carts_table.id'))
+    item_user_id = db.Column(db.Integer, db.ForeignKey('users_table.id'))
+    item_cart_id = db.Column(db.Integer, db.ForeignKey('carts_table.id'))
+
+    cart = db.relationship('Cart', back_populates='items')
+    user = db.relationship('User', back_populates='items')
