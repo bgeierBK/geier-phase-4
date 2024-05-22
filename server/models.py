@@ -13,7 +13,7 @@ metadata = MetaData(naming_convention={
 
 db = SQLAlchemy(metadata=metadata)
 
-class User(db.model, SerializerMixin):
+class User(db.Model, SerializerMixin):
     __tablename__ = 'users_table'
 
     id = db.Column(db.Integer, primary_key=True)
@@ -26,7 +26,7 @@ class User(db.model, SerializerMixin):
     cart = db.relationship('Cart', back_populates="user")
     items = db.relationship('Item', back_populates="user")
 
-    serialize_rules=['-cart', '-items']
+    serialize_rules=['-cart.user', '-items.user','-_hashed_password']
 
     @validates('username')
     def validate_username(self, key, value):
@@ -37,7 +37,7 @@ class User(db.model, SerializerMixin):
     
     @validates('age')
     def validate_age(self, key, value):
-        if value >=13:
+        if value == None or value >=13:
             return value
         else:
             raise ValueError("Must be at least 13 years old")
@@ -51,7 +51,7 @@ class User(db.model, SerializerMixin):
     
     
 
-class Cart(db.model, SerializerMixin):
+class Cart(db.Model, SerializerMixin):
     __tablename__ = 'carts_table'
 
     id = db.Column(db.Integer, primary_key=True)
@@ -60,7 +60,7 @@ class Cart(db.model, SerializerMixin):
     items = db.relationship('Item', back_populates = 'cart')
     user = db.relationship('User', back_populates = 'cart')
 
-    serialize_rules=['-items', '-user']
+    serialize_rules=['-items.cart', '-user.cart']
 
 
 class Item(db.Model, SerializerMixin):
@@ -75,4 +75,4 @@ class Item(db.Model, SerializerMixin):
     cart = db.relationship('Cart', back_populates='items')
     user = db.relationship('User', back_populates='items')
 
-    serialize_rules=['-cart', '-user']
+    serialize_rules=['-cart.items', '-user.items']
