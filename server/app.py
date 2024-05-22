@@ -26,6 +26,64 @@ db.init_app(app)
 def index():
     return "Hello world"
 
+@app.post("/signup")
+def signup():
+    try:
+        new_user = User(
+            username=request.json.get('username'),
+            email_address=request.json.get('email_address'),
+            phone_number=request.json.get('phone_number'),
+            age=request.json.get('age')
+            )
+        new_user._hashed_password = bcrypt.generate_password_hash(request.json['password']).decode('utf-8')
+        db.session.add(new_user)
+        db.session.commit()
+
+        new_cart = Cart( cart_user_id=new_user.id )
+
+        db.session.add(new_cart)
+        db.session.commit()
+        session["user_id"] = new_user.id
+        return new_user.to_dict(), 201
+    except Exception as e:
+        return { 'error': str(e) }, 406
+
+@app.get("/check_session")
+def check_session():
+    user_id = session.get('user_id')
+    if user_id:
+        return User.query.filter(User.id == user_id).first().to_dict(), 200
+    return {}, 401
+
+@app.post("/login")
+def login():
+    user = User.query.filter(User.username == request.json['username']).first()
+    if user == None:
+        return {'error': 'username not found'}, 401
+    elif bcrypt.check_password_hash(user._hashed_password, request.json['password']):
+        session['user_id'] = user.id
+        return user.to_dict(), 200
+    return {'error': 'wrong password'}, 401
+
+@app.delete("/logout")
+def logout():
+    if session.get('user_id') == None:
+        return {}, 401
+    session['user_id'] = None
+    return {}, 204
+
+@app.get("/user/cart")
+def get_current_user_cart():
+    if session.get('user_id') == None:
+        return {},  401
+    cart = Cart.query.where(Cart.cart_user_id == session['user_id']).first()
+    if cart:
+        return cart.to_dict()
+    return {'error': "user doesn't have a cart"}, 404
+
+
+
+
 @app.get("/users")
 def get_users():
     return [user.to_dict() for user in User.query.all()], 200
