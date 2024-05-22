@@ -1,4 +1,5 @@
-function Collectioncard(){
+
+function MarketplaceCollectionCard(){
 
     return (
         <div style={{
@@ -12,9 +13,9 @@ function Collectioncard(){
             }} alt='collection image'/>
             <p>Collection description</p>
             <span>Collection price</span>
-            <button>Delete</button>
+            <button>Add to Cart</button>
         </div>
     )
 }
 
-export default Collectioncard
+export default MarketplaceCollectionCard

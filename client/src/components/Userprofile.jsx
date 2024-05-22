@@ -1,8 +1,40 @@
+import { useOutletContext } from 'react-router-dom'
+import Collectioncard from './Collectioncard.jsx'
+
 function Userprofile(){
+
+    const { collections } = useOutletContext()
+
+    const mappedCollections = collections.map(collection => <Collectioncard />)
     return (
-        <h1> this is the userporfile page
-            this will have a button to go to marketplace
-        </h1>
+        <div>
+            <h1> Welcome username </h1>
+            <div style={{
+                display: 'flex',
+                flexWrap: 'wrap',
+                gap: '3px'
+            }}>
+                    {/* this will have a button to go to marketplace */}
+                {mappedCollections}
+            </div>
+            <br />
+            <br />
+            <h2 style={{
+                width: '100%',
+                textAlign: 'center',
+                color: '#333'
+            }}>Add a collection:</h2>
+            <form style={{
+                position: 'absolute',
+                left: '50%',
+                top: '80%',
+                transform: 'translateX(-50%'
+            }}> 
+                <input type='text' name='description' placeholder='description'/>
+                <input type='number' name='price' placeholder='price'/>
+                <input type='text' name='image' placeholder='image_url' />
+            </form>
+        </div>
     )
 }
 
