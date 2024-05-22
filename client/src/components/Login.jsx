@@ -1,7 +1,21 @@
+
+
 function Login(){
 
     return(
-    <h1>this is login component</h1>)
+        <div>
+            <h2>Log in</h2>
+            <form style={{
+                display: 'flex',
+                flexWrap: 'wrap',
+                flexDirection: 'column'
+            }}>
+                <input type="'text" name="username" placeholder="username" />
+                <input type="password" name="password" placeholder="password" />
+                <input type="submit" name="submit" value='Log in'/>
+            </form>
+        </div>
+    )
 }
 
 export default Login
