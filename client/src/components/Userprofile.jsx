@@ -3,12 +3,13 @@ import Collectioncard from './Collectioncard.jsx'
 
 function Userprofile(){
 
+    const {currentUser} = useOutletContext()
     const { collections } = useOutletContext()
 
     const mappedCollections = collections.map(collection => <Collectioncard />)
     return (
         <div>
-            <h1> Welcome username </h1>
+            <h1> Welcome {currentUser} </h1>
             <div style={{
                 display: 'flex',
                 flexWrap: 'wrap',
