@@ -1,4 +1,5 @@
 import { Outlet } from "react-router-dom"
+import Navbar from "./Navbar"
 
 function App() {
 
@@ -6,13 +7,17 @@ function App() {
   const users = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 's']
 
   return (
+
     <div className='App'>
+
       <h1 style={{
         width: '100%',
         textAlign: 'center',
         color: '#333'
       }}>Collector Market</h1>
+        <Navbar/>
       <Outlet context={{collections:collections, users: users}} />
+     
     </div>
   )
 
