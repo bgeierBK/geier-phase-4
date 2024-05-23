@@ -161,6 +161,7 @@ def add_item():
         new_item = Item( 
             name=request.json.get('name'),
             description=request.json.get('description'),
+            img_url=request.json.get('img_url'),
             item_user_id=request.json.get('item_user_id'),
             item_cart_id=request.json.get('item_cart_id')
             )
