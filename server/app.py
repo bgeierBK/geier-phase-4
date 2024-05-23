@@ -10,7 +10,7 @@ from models import db, User, Cart, Item # import your models here!
 def index():
     return "Hello world"
 
-@app.post("/signup")
+@app.post("/api/signup")
 def signup():
     try:
         new_user = User(
@@ -32,14 +32,14 @@ def signup():
     except Exception as e:
         return { 'error': str(e) }, 406
 
-@app.get("/check_session")
+@app.get("/api/check_session")
 def check_session():
     user_id = session.get('user_id')
     if user_id:
         return User.query.filter(User.id == user_id).first().to_dict(), 200
     return {}, 401
 
-@app.post("/login")
+@app.post("/api/login")
 def login():
     user = User.query.filter(User.username == request.json['username']).first()
     if user == None:
@@ -49,14 +49,14 @@ def login():
         return user.to_dict(), 200
     return {'error': 'wrong password'}, 401
 
-@app.delete("/logout")
+@app.delete("/api/logout")
 def logout():
     if session.get('user_id') == None:
         return {}, 401
     session['user_id'] = None
     return {}, 204
 
-@app.get("/user/cart")
+@app.get("/api/user/cart")
 def get_current_user_cart():
     if session.get('user_id') == None:
         return {},  401
@@ -68,18 +68,18 @@ def get_current_user_cart():
 
 
 
-@app.get("/users")
+@app.get("/api/users")
 def get_users():
     return [user.to_dict() for user in User.query.all()], 200
 
-@app.get('/users/<int:id>')
+@app.get('/api/users/<int:id>')
 def get_public_user(id):
     user = User.query.where(User.id == id).first()
     if user:
         return user.to_dict(), 200
     return {}, 404
 
-@app.patch('/users/<int:id>')
+@app.patch('/api/users/<int:id>')
 def update_user(id):
     user = User.query.where(User.id == id).first()
     if user:
@@ -90,7 +90,7 @@ def update_user(id):
         return user.to_dict()
     return {}, 404
 
-@app.delete('/users/<int:id>')
+@app.delete('/api/users/<int:id>')
 def delete_user(id):
     user = User.query.where(User.id == id).first()
     if user:
@@ -99,7 +99,7 @@ def delete_user(id):
         return {}, 204
     return {}, 404
 
-@app.post('/users')
+@app.post('/api/users')
 def add_user():
     try:
         new_user = User(
@@ -115,7 +115,7 @@ def add_user():
     except Exception as e:
         return { 'error': str(e) }, 406
 
-@app.post('/carts')
+@app.post('/api/carts')
 def add_cart():
     try:
         new_cart = Cart( cart_user_id=request.json.get('cart_user_id') )
@@ -125,14 +125,14 @@ def add_cart():
     except Exception as e:
         return { 'error': str(e) }, 406
 
-@app.get('/carts/<int:id>')
+@app.get('/api/carts/<int:id>')
 def get_cart(id):
     cart = Cart.query.where(Cart.id == id).first()
     if cart:
         return cart.to_dict(), 200
     return {}, 404
 
-@app.patch('/carts/<int:id>')
+@app.patch('/api/carts/<int:id>')
 def update_cart(id):
     try:
         cart = Cart.query.where(Cart.id == id).first()
@@ -146,7 +146,7 @@ def update_cart(id):
     except Exception as e:
         return { 'error': str(e) }, 406
 
-@app.delete('/carts/<int:id>')
+@app.delete('/api/carts/<int:id>')
 def delete_cart(id):
     cart = Cart.query.where(Cart.id == id).first()
     if cart:
@@ -155,7 +155,7 @@ def delete_cart(id):
         return {}, 204
     return {}, 404
 
-@app.post('/items')
+@app.post('/api/items')
 def add_item():
     try:
         new_item = Item( 
@@ -171,18 +171,18 @@ def add_item():
     except Exception as e:
         return { 'error': str(e) }, 406
 
-@app.get("/items")
+@app.get("/api/items")
 def get_items():
     return [item.to_dict() for item in Item.query.all()], 200
 
-@app.get('/items/<int:id>')
+@app.get('/api/items/<int:id>')
 def get_item(id):
     item = Item.query.where(Item.id == id).first()
     if item:
         return item.to_dict(), 200
     return {}, 404
 
-@app.patch('/items/<int:id>')
+@app.patch('/api/items/<int:id>')
 def update_item(id):
     item = Item.query.where(Item.id == id).first()
     if item:
@@ -193,7 +193,7 @@ def update_item(id):
         return item.to_dict()
     return {}, 404
 
-@app.delete('/items/<int:id>')
+@app.delete('/api/items/<int:id>')
 def delete_item(id):
     item = Item.query.where(Item.id == id).first()
     if item:

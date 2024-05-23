@@ -50,7 +50,7 @@ class User(db.Model, SerializerMixin):
     
     @validates('email_address')
     def validate_email(self, key, value):
-        if '@' in value:
+        if value == None or '@' in value:
             return value
         else:
             return ValueError('Not a valid email address')
