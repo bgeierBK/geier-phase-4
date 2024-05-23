@@ -1,26 +1,10 @@
 #!/usr/bin/env python3
 
-from flask_bcrypt import Bcrypt
-from flask import Flask, request, session
-from flask_sqlalchemy import SQLAlchemy
-from flask_migrate import Migrate
-from flask_cors import CORS
+from flask import request, session
 
+from config import app, bcrypt
 from models import db, User, Cart, Item # import your models here!
 
-app = Flask(__name__)
-app.secret_key = "something"
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///app.db'
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-app.json.compact = False
-
-bcrypt = Bcrypt(app)
-
-CORS(app)
-
-migrate = Migrate(app, db)
-
-db.init_app(app)
 
 @app.get('/')
 def index():
@@ -35,7 +19,7 @@ def signup():
             phone_number=request.json.get('phone_number'),
             age=request.json.get('age')
             )
-        new_user._hashed_password = bcrypt.generate_password_hash(request.json['password']).decode('utf-8')
+        new_user.hashed_password = request.json['password']
         db.session.add(new_user)
         db.session.commit()
 
@@ -60,7 +44,7 @@ def login():
     user = User.query.filter(User.username == request.json['username']).first()
     if user == None:
         return {'error': 'username not found'}, 401
-    elif bcrypt.check_password_hash(user._hashed_password, request.json['password']):
+    elif user.authenticate(request.json['password']):
         session['user_id'] = user.id
         return user.to_dict(), 200
     return {'error': 'wrong password'}, 401
@@ -124,7 +108,7 @@ def add_user():
             phone_number=request.json.get('phone_number'),
             age=request.json.get('age')
             )
-        new_user._hashed_password = bcrypt.generate_password_hash(request.json['password']).decode('utf-8')
+        new_user.hashed_password = request.json['password']
         db.session.add(new_user)
         db.session.commit()
         return new_user.to_dict(), 201

@@ -1,17 +1,9 @@
-from flask_sqlalchemy import SQLAlchemy
-from sqlalchemy import MetaData
+from sqlalchemy.ext.hybrid import hybrid_property
+from sqlalchemy_serializer import SerializerMixin
 from sqlalchemy.orm import validates
 from sqlalchemy.ext.associationproxy import association_proxy
-from sqlalchemy_serializer import SerializerMixin
-from flask_bcrypt import Bcrypt
 
-bcrypt = Bcrypt()
-
-metadata = MetaData(naming_convention={
-    "fk": "fk_%(table_name)s_%(column_0_name)s_%(referred_table_name)s",
-})
-
-db = SQLAlchemy(metadata=metadata)
+from config import db, bcrypt
 
 class User(db.Model, SerializerMixin):
     __tablename__ = 'users_table'
@@ -27,6 +19,20 @@ class User(db.Model, SerializerMixin):
     items = db.relationship('Item', back_populates="user")
 
     serialize_rules=['-cart.user', '-items.user','-_hashed_password']
+
+    @hybrid_property
+    def hashed_password(self):
+        raise AttributeError('Password hashes may not be viewed.')
+
+    @hashed_password.setter
+    def hashed_password(self, password):
+        hashed_password = bcrypt.generate_password_hash(
+            password.encode('utf-8'))
+        self._hashed_password = hashed_password.decode('utf-8')
+
+    def authenticate(self, password):
+        return bcrypt.check_password_hash(
+            self._hashed_password, password.encode('utf-8'))
 
     @validates('username')
     def validate_username(self, key, value):
