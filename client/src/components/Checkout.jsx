@@ -1,6 +1,9 @@
 import { useState } from "react"
 import React from "react"
+import { useOutletContext } from "react-router-dom";
+
 function Checkout(){
+    const {cartItems} = useOutletContext()
 
     const [shippingInfo, setShippingInfo] = useState({
         fullName: '',
@@ -62,7 +65,9 @@ function Checkout(){
     
     console.log('Form submitted:', { shippingInfo, billingInfo, paymentInfo });
   };
-
+  if (cartItems =='' ){
+    return (<h1> Your Cart is Empty!</h1>)}
+  else{
   return (
     <div>
       <h2>Checkout Form</h2>
@@ -127,6 +132,7 @@ function Checkout(){
       </form>
     </div>
   );
+}
 }
 
 export default Checkout

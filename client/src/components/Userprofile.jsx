@@ -1,15 +1,19 @@
 import { useOutletContext } from 'react-router-dom'
-import Collectioncard from './Collectioncard.jsx'
+import Usercollectioncard from './Usercollectioncard.jsx'
+import Signup from './Signup.jsx'
+import Login from './Login.jsx'
 
 function Userprofile(){
 
-    const {currentUser} = useOutletContext()
+    const {currentUser, setCurrentUser} = useOutletContext()
     const { collections } = useOutletContext()
 
-    const mappedCollections = collections.map(collection => <Collectioncard key={collection.id} description={collection.description} price={collection.price} img_url={collection.img_url} />)
+    const mappedCollections = collections.map(collection => <Usercollectioncard key={collection.id} id={collection.id} description={collection.description} price={collection.price} img_url={collection.img_url} />)
+    
+
     return (
         <div>
-            <h1> Welcome {currentUser} </h1>
+            <h1> Welcome {currentUser.username} </h1>
             <div style={{
                 display: 'flex',
                 flexWrap: 'wrap',

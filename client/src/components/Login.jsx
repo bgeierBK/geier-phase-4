@@ -33,7 +33,7 @@ function handleSubmit(e){
     return(
         <div>
             <h2>Log in</h2>
-            <form style={{
+            <form onSubmit = {handleSubmit} style={{
                 display: 'flex',
                 flexWrap: 'wrap',
                 flexDirection: 'column'
