@@ -1,16 +1,16 @@
-import { useState } from "react"
 import Collectioncard from "./Collectioncard.jsx";
+import { useOutletContext } from "react-router-dom";
 
 
 function Cart(){
 
-    const [ cartItems, setCartItems ] = useState()
+    const { cartItems, setCartItems } = useOutletContext()
 
-    
+    console.log(cartItems)
 
     function onDelete(id) {
         let itemRemoved = false; 
-        const updatedCartItems = cartItems.filter(item => {
+        const updatedCartItems = cartItems.filter(item => { 
 
             if (item.id === id && !itemRemoved) {
                 itemRemoved = true; 
@@ -39,7 +39,7 @@ function Cart(){
     }
     return (
         <div>
-            {updatedItems.map(item => <Collectioncard key={item.id} description={item.description} price={item.price} image={Img_url}/>)}
+            {updatedItems.map(item => <Collectioncard key={item.id} id={item.id} description={item.description} price={item.price} img_url={item.img_url} onDelete={onDelete} />)}
         </div>
     )
 }

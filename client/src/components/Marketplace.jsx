@@ -5,7 +5,7 @@ function Marketplace(){
 
     const { users } = useOutletContext()
 
-    const mappedUsers = users.map(user => <Marketplacecard />)
+    const mappedUsers = users.map(user => <Marketplacecard key={user.id} username={user.name} />)
     return (
         <div>
             <h1>Marketplace</h1>
