@@ -1,7 +1,25 @@
 import Signup from "./Signup.jsx"
 import Login from "./Login.jsx"
+import Userprofile from "./Userprofile.jsx"
+import { useOutletContext } from "react-router-dom"
 
 function Homepage(){
+
+    const {currentUser, setCurrentUser} = useOutletContext()
+    if (!currentUser) { 
+        return (
+    
+            <div className="flex-row">
+    
+              <Signup setCurrentUser={setCurrentUser}/>
+    
+              <Login setCurrentUser={setCurrentUser}/>
+    
+            </div>
+    
+        )
+    
+        } else {
 
     return(
         <div style={{
@@ -13,12 +31,12 @@ function Homepage(){
             flexWrap: 'wrap',
             flexDirection: 'row'
         }}>
-            <Signup />
-            <Login />
+            <Userprofile/>
         </div>
     )
  pass
 
+}
 }
 
 

@@ -17,7 +17,7 @@ function handleSubmit(e){
             "Content-Type": "application/json"
 
         },
-        body: JSON.stringify({username, password})
+        body: JSON.stringify({"username": username, "password": password, "email_address":'123@email.com', "phone_number":213232423, "age": 17 })
     })
     .then (res =>{
         if(res.ok ){
@@ -33,7 +33,7 @@ function handleSubmit(e){
     return(
         <div>
             <h2>Sign up</h2>
-            <form style={{
+            <form onSubmit={handleSubmit} style={{
                 display: 'flex',
                 flexWrap: 'wrap',
                 flexDirection: 'column'
