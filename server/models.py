@@ -69,6 +69,7 @@ class Item(db.Model, SerializerMixin):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String)
     description = db.Column(db.String)
+    img_url = db.Column(db.String)
     item_user_id = db.Column(db.Integer, db.ForeignKey('users_table.id'))
     item_cart_id = db.Column(db.Integer, db.ForeignKey('carts_table.id'))
 
