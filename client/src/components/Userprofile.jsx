@@ -6,7 +6,7 @@ function Userprofile(){
     const {currentUser} = useOutletContext()
     const { collections } = useOutletContext()
 
-    const mappedCollections = collections.map(collection => <Collectioncard />)
+    const mappedCollections = collections.map(collection => <Collectioncard key={collection.id} description={collection.description} price={collection.price} img_url={collection.img_url} />)
     return (
         <div>
             <h1> Welcome {currentUser} </h1>
