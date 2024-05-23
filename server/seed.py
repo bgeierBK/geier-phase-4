@@ -18,29 +18,41 @@ if __name__ == '__main__':
         items = []
         carts = []
 
-        u = User(username="Stu Redman", age = 27, email_address="stu@gmail.com", _hashed_password = "password", phone_number= "5551234567")
+        u = User(username="Stu Redman", age = 27, email_address="stu@gmail.com", phone_number= "5551234567")
+        u.hashed_password="password"
         users.append(u)
-        u = User(username="Fenriz", age = 45, email_address="fenriz@gmail.com", _hashed_password = "password", phone_number= "5551234567")
+        u = User(username="Fenriz", age = 45, email_address="fenriz@gmail.com", phone_number= "5551234567")
+        u.hashed_password="password"
         users.append(u)
-        u = User(username="Mother Abigail", age = 103, email_address="motherabigail@gmail.com", _hashed_password = "password", phone_number= "5551234567")
+        u = User(username="Mother Abigail", age = 103, email_address="motherabigail@gmail.com", phone_number= "5551234567")
+        u.hashed_password="password"
         users.append(u)
-        u = User(username="Harold", age = 19, email_address="harold@gmail.com", _hashed_password = "password", phone_number= "5551234567")
+        u = User(username="Harold", age = 19, email_address="harold@gmail.com", phone_number= "5551234567")
+        u.hashed_password="password"
         users.append(u)
-        u = User(username="Nick Andros", age = 23, email_address="nick@gmail.com", _hashed_password = "password", phone_number= "5551234567")
+        u = User(username="Nick Andros", age = 23, email_address="nick@gmail.com", phone_number= "5551234567")
+        u.hashed_password="password"
         users.append(u)
-        u = User(username="Tom Cullen", age =45, email_address="tom@gmail.com", _hashed_password = "password", phone_number= "5551234567")
+        u = User(username="Tom Cullen", age =45, email_address="tom@gmail.com", phone_number= "5551234567")
+        u.hashed_password="password"
         users.append(u)
-        u = User(username="Larry Underwood", age =30, email_address="larry@gmail.com", _hashed_password = "password", phone_number= "5551234567")
+        u = User(username="Larry Underwood", age =30, email_address="larry@gmail.com", phone_number= "5551234567")
+        u.hashed_password="password"
         users.append(u)
-        u = User(username="Glen Bateman", age =60, email_address="glen@gmail.com", _hashed_password = "password", phone_number= "5551234567")
+        u = User(username="Glen Bateman", age =60, email_address="glen@gmail.com", phone_number= "5551234567")
+        u.hashed_password="password"
         users.append(u)
-        u = User(username="Randall Flagg", age =32, email_address="flagg@gmail.com", _hashed_password = "password", phone_number= "5551234567")
+        u = User(username="Randall Flagg", age =32, email_address="flagg@gmail.com", phone_number= "5551234567")
+        u.hashed_password="password"
         users.append(u)
-        u = User(username="Lloyd Henreid", age =27, email_address="lloyd@gmail.com", _hashed_password = "password", phone_number= "5551234567")
+        u = User(username="Lloyd Henreid", age =27, email_address="lloyd@gmail.com", phone_number= "5551234567")
+        u.hashed_password="password"
         users.append(u)
-        u = User(username="Nadine Cross", age =22, email_address="nadine@gmail.com", _hashed_password = "password", phone_number= "5551234567")
+        u = User(username="Nadine Cross", age =22, email_address="nadine@gmail.com", phone_number= "5551234567")
+        u.hashed_password="password"
         users.append(u)
-        u = User(username="Frances Goldsmith", age =19, email_address="frances@gmail.com", _hashed_password = "password", phone_number= "5551234567")
+        u = User(username="Frances Goldsmith", age =19, email_address="frances@gmail.com", phone_number= "5551234567")
+        u.hashed_password="password"
         users.append(u)
 
 
