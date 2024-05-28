@@ -9,15 +9,27 @@ function App() {
   const [cartItems, setCartItems] =useState([])
 
 
+  useEffect( () => {
+    fetch('/api/check_session')
+    .then(response => {
+      if (response.status === 200) {
+        response.json()
+        .then(loggedUser => setCurrentUser(loggedUser))
+      }
+    }
+    )
+  }, [])
+
+
   useEffect(()=>{
-      fetch("http://localhost:3000/collections")
+      fetch("/api/items")
       .then(res => res.json())
       .then(collections => setCollections (collections))
   }, [])
 
   const [users, setUsers] = useState([])
   useEffect(()=>{
-      fetch("http://localhost:3000/users")
+      fetch("/api/users")
       .then(res => res.json())
       .then(users => setUsers (users))
   }, [])

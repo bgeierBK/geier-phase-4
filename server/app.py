@@ -36,7 +36,10 @@ def signup():
 def check_session():
     user_id = session.get('user_id')
     if user_id:
-        return User.query.filter(User.id == user_id).first().to_dict(), 200
+        user = User.query.filter(User.id == user_id).first()
+        if user:
+            return user.to_dict(), 200
+        return {'error': 'user not found'}, 404
     return {}, 401
 
 @app.post("/api/login")
@@ -108,7 +111,7 @@ def add_user():
             phone_number=request.json.get('phone_number'),
             age=request.json.get('age')
             )
-        new_user.hashed_password = request.json['password']
+        new_user._hashed_password = request.json['password']
         db.session.add(new_user)
         db.session.commit()
         return new_user.to_dict(), 201

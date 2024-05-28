@@ -1,14 +1,14 @@
 import { useOutletContext } from 'react-router-dom'
 import MarketplaceCollectionCard from './MarketplaceCollectionCard.jsx'
 
-function Marketplacecard({username}){
+function Marketplacecard({user}){
 
     const { collections } = useOutletContext()
-    const mappedCollections = collections.map(collection => <MarketplaceCollectionCard key={collection.id} id={collection.id} description={collection.description} price={collection.price} img_url={collection.img_url} />)
+    const mappedCollections = user.items.map(collection => <MarketplaceCollectionCard key={collection.id} id={collection.id} description={collection.description} price={collection.price} img_url={collection.img_url} />)
     
     return (
         <div>
-            <h1>{username.toUpperCase()}</h1>
+            <h1>{user.username.toUpperCase()}</h1>
             <div style={{
                 display: 'flex',
                 flexWrap: 'wrap',

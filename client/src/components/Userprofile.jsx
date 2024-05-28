@@ -1,19 +1,25 @@
 import { useOutletContext } from 'react-router-dom'
 import Usercollectioncard from './Usercollectioncard.jsx'
-import Signup from './Signup.jsx'
-import Login from './Login.jsx'
 
 function Userprofile(){
 
     const {currentUser, setCurrentUser} = useOutletContext()
     const { collections } = useOutletContext()
 
-    const mappedCollections = collections.map(collection => <Usercollectioncard key={collection.id} id={collection.id} description={collection.description} price={collection.price} img_url={collection.img_url} />)
+    const mappedCollections = currentUser.items.map(collection => <Usercollectioncard key={collection.id} id={collection.id} description={collection.description} price={collection.price} img_url={collection.img_url} />)
+
+    function handleLogout(){
+        setCurrentUser(null)
+        fetch('/api/logout', {
+            method: 'DELETE'
+        })
+    }
     
 
     return (
         <div>
             <h1> Welcome {currentUser.username} </h1>
+            <button onClick={handleLogout}>Log out</button>
             <div style={{
                 display: 'flex',
                 flexWrap: 'wrap',
