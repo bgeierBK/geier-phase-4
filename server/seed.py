@@ -34,7 +34,7 @@ if __name__ == '__main__':
         u.hashed_password="password"
         users.append(u)
         u = User(username="Tom Cullen", age =45, email_address="tom@gmail.com", phone_number= "5551234567")
-        u.hashed_password="password"
+        u.hashed_password="passwor`d"
         users.append(u)
         u = User(username="Larry Underwood", age =30, email_address="larry@gmail.com", phone_number= "5551234567")
         u.hashed_password="password"
