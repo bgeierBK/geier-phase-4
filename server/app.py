@@ -3,7 +3,7 @@
 from flask import request, session
 
 from config import app, bcrypt
-from models import db, User, Cart, Item # import your models here!
+from models import db, User, Cart, Item, Badge, UserBadge # import your models here!
 
 
 @app.get('/')
@@ -204,6 +204,83 @@ def delete_item(id):
         db.session.commit()
         return {}, 204
     return {}, 404
+
+
+@app.post('/api/badges')
+def add_badge():
+    try:
+        new_badge = Badge( 
+            name=request.json.get('name'),
+            )
+        db.session.add(new_badge)
+        db.session.commit()
+        return new_badge.to_dict(), 201
+    except Exception as e:
+        return { 'error': str(e) }, 406
+
+@app.get("/api/badges")
+def get_badges():
+    return [badge.to_dict() for badge in Badge.query.all()], 200
+
+@app.get('/api/badges/<int:id>')
+def get_badge(id):
+    badge = Badge.query.where(Badge.id == id).first()
+    if badge:
+        return badge.to_dict(), 200
+    return {}, 404
+
+@app.patch('/api/badges/<int:id>')
+def update_badge(id):
+    badge = Badge.query.where(Badge.id == id).first()
+    if badge:
+        for key in request.json.keys():
+            setattr(badge,key,request.json[key])
+        db.session.add(badge)
+        db.session.commit()
+        return badge.to_dict()
+    return {}, 404
+
+@app.delete('/api/badges/<int:id>')
+def delete_badge(id):
+    badge = Badge.query.where(Badge.id == id).first()
+    if badge:
+        db.session.delete(badge)
+        db.session.commit()
+        return {}, 204
+    return {}, 404
+
+
+@app.get("/api/user-badge")
+def get_user_badges():
+    return [user_badge.to_dict() for user_badge in UserBadge.query.all()], 200
+
+@app.get('/api/user-badge/<int:id>')
+def get_user_badge(id):
+    user_badge = UserBadge.query.where(UserBadge.id == id).first()
+    if user_badge:
+        return user_badge.to_dict(), 200
+    return {}, 404
+
+@app.patch('/api/user-badge/<int:id>')
+def update_user_badge(id):
+    user_badge = UserBadge.query.where(UserBadge.id == id).first()
+    if user_badge:
+        for key in request.json.keys():
+            setattr(user_badge,key,request.json[key])
+        db.session.add(user_badge)
+        db.session.commit()
+        return user_badge.to_dict()
+    return {}, 404
+
+@app.delete('/api/user-badge/<int:id>')
+def delete_user_badge(id):
+    user_badge = Badge.query.where(Badge.id == id).first()
+    if user_badge:
+        db.session.delete(user_badge)
+        db.session.commit()
+        return {}, 204
+    return {}, 404
+
 
 
 if __name__ == '__main__':
