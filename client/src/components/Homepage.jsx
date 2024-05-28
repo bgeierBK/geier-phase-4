@@ -11,8 +11,7 @@ function Homepage(){
     
             <div className="flex-row">
     
-              <Signup setCurrentUser={setCurrentUser}/>
-    
+              {/* <Signup setCurrentUser={setCurrentUser}/> */}
               <Login setCurrentUser={setCurrentUser}/>
     
             </div>
