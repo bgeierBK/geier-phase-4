@@ -17,9 +17,11 @@ class User(db.Model, SerializerMixin):
 
     cart = db.relationship('Cart', back_populates="user")
     items = db.relationship('Item', back_populates="user")
-    badges = db.relationship('Badge', secondary="user_badge", backref='users')
+    user_badge = db.relationship('UserBadge', back_populates='user')
 
-    serialize_rules=['-cart.user', '-items.user','-_hashed_password']
+    badges = association_proxy('user_badge', 'badge')
+
+    serialize_rules=['-cart.user', '-items.user','-_hashed_password','badges','-badges.users','-user_badge']
 
     @hybrid_property
     def hashed_password(self):
@@ -87,13 +89,23 @@ class Item(db.Model, SerializerMixin):
     serialize_rules=['-cart.items', '-user.items']
 
 class Badge(db.Model, SerializerMixin):
-    __tablename__ = 'badges'
+    __tablename__ = 'badges_table'
     id= db.Column(db.Integer, primary_key =True)
     name = db.Column(db.String)
 
+    user_badge = db.relationship('UserBadge', back_populates='badge')
+
+    users = association_proxy('user_badge', 'user')
+    serialize_rules=['-user_badge']
+
 class UserBadge(db.Model, SerializerMixin):
-    __tablename__ = 'user_badge'
-    user_id= db.Column(db.Integer, db.ForeignKey('users.id'), primary_key=True)
-    badge_id=db.Column(db.Integer, db.ForeignKey('badges.id'), primary_key=True)
+    __tablename__ = 'user_badge_table'
+    id = db.Column(db.Integer, primary_key =True)
+    user_id=db.Column(db.Integer, db.ForeignKey('users_table.id'))
+    badge_id=db.Column(db.Integer, db.ForeignKey('badges_table.id'))
     display=db.Column(db.Boolean, default=True)
+
+    user = db.relationship('User', back_populates='user_badge')
+    badge = db.relationship('Badge', back_populates='user_badge')
+    serialize_rules=['-user.badges','-badge.users','-user.user_badge','-badge.user_badge']
 
