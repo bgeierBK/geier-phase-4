@@ -17,6 +17,7 @@ class User(db.Model, SerializerMixin):
 
     cart = db.relationship('Cart', back_populates="user")
     items = db.relationship('Item', back_populates="user")
+    badges = db.relationship('Badge', secondary="user_badge", backref='users')
 
     serialize_rules=['-cart.user', '-items.user','-_hashed_password']
 
@@ -84,3 +85,15 @@ class Item(db.Model, SerializerMixin):
     user = db.relationship('User', back_populates='items')
 
     serialize_rules=['-cart.items', '-user.items']
+
+class Badge(db.Model, SerializerMixin):
+    __tablename__ = 'badges'
+    id= db.Column(db.Integer, primary_key =True)
+    name = db.Column(db.String)
+
+class UserBadge(db.Model, SerializerMixin):
+    __tablename__ = 'user_badge'
+    user_id= db.Column(db.Integer, db.ForeignKey('users.id'), primary_key=True)
+    badge_id=db.Column(db.Integer, db.ForeignKey('badges.id'), primary_key=True)
+    display=db.Column(db.Boolean, default=True)
+
