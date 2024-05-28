@@ -86,7 +86,7 @@ class Item(db.Model, SerializerMixin):
     cart = db.relationship('Cart', back_populates='items')
     user = db.relationship('User', back_populates='items')
 
-    serialize_rules=['-cart.items', '-user.items']
+    serialize_rules=['-cart.items', '-user.items', '-user.cart']
 
 class Badge(db.Model, SerializerMixin):
     __tablename__ = 'badges_table'
