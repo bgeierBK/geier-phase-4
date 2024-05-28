@@ -11,7 +11,7 @@ const{setCurrentUser}=useOutletContext()
 
 function handleSubmit(e){
     e.preventDefault()
-    fetch("/api/users", {
+    fetch("/api/signup", {
         method : 'POST',
         headers: {
             "Content-Type": "application/json"

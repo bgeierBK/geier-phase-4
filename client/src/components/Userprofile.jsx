@@ -6,7 +6,7 @@ function Userprofile(){
     const {currentUser, setCurrentUser} = useOutletContext()
     const { collections } = useOutletContext()
 
-    const mappedCollections = collections.map(collection => <Usercollectioncard key={collection.id} id={collection.id} description={collection.description} price={collection.price} img_url={collection.img_url} />)
+    const mappedCollections = currentUser.items.map(collection => <Usercollectioncard key={collection.id} id={collection.id} description={collection.description} price={collection.price} img_url={collection.img_url} />)
 
     function handleLogout(){
         setCurrentUser(null)

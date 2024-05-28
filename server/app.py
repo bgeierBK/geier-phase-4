@@ -36,7 +36,10 @@ def signup():
 def check_session():
     user_id = session.get('user_id')
     if user_id:
-        return User.query.filter(User.id == user_id).first().to_dict(), 200
+        user = User.query.filter(User.id == user_id).first()
+        if user:
+            return user.to_dict(), 200
+        return {'error': 'user not found'}, 404
     return {}, 401
 
 @app.post("/api/login")

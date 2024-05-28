@@ -22,14 +22,14 @@ function App() {
 
 
   useEffect(()=>{
-      fetch("http://localhost:3000/collections")
+      fetch("/api/items")
       .then(res => res.json())
       .then(collections => setCollections (collections))
   }, [])
 
   const [users, setUsers] = useState([])
   useEffect(()=>{
-      fetch("http://localhost:3000/users")
+      fetch("/api/users")
       .then(res => res.json())
       .then(users => setUsers (users))
   }, [])

@@ -21,14 +21,14 @@ class User(db.Model, SerializerMixin):
     serialize_rules=['-cart.user', '-items.user','-_hashed_password']
 
     @hybrid_property
-    def _hashed_password(self):
+    def hashed_password(self):
         raise AttributeError('Password hashes may not be viewed.')
 
-    @_hashed_password.setter
-    def _hashed_password(self, password):
-        _hashed_password = bcrypt.generate_password_hash(
+    @hashed_password.setter
+    def hashed_password(self, password):
+        hashed_password = bcrypt.generate_password_hash(
             password.encode('utf-8'))
-        self._hashed_password = _hashed_password.decode('utf-8')
+        self._hashed_password = hashed_password.decode('utf-8')
 
     def authenticate(self, password):
         return bcrypt.check_password_hash(
