@@ -1,8 +1,30 @@
 import { useOutletContext } from "react-router-dom"
 
-function MarketplaceCollectionCard({ img_url, id, price, description}){
+function MarketplaceCollectionCard({ collection}){
 
-    const { handleAddToCart } = useOutletContext()
+    const { currentUser,setCurrentUser } = useOutletContext()
+
+    function handleAddToCart(){
+        fetch(`/api/items/${collection.id}`,{
+            method : 'PATCH',
+            headers: {
+                "Content-Type": "application/json",
+                "Accept": "application/json"
+            },
+            body: JSON.stringify({item_cart_id: currentUser.id})
+        })
+        .then(r=>r.json())
+        .then(item => setCurrentUser({
+                ...currentUser,
+                cart: [{
+                    ...currentUser.cart[0],
+                    items: [
+                        item,
+                        ...currentUser.cart[0].items
+                    ]
+                }]
+        }))
+    }
 
     return (
         <div style={{
@@ -10,13 +32,13 @@ function MarketplaceCollectionCard({ img_url, id, price, description}){
             flexWrap: 'wrap',
             flexDirection: 'column'
         }}>
-            <img src={img_url} style={{
+            <img src={collection.img_url} style={{
                 width: '200px',
                 height: '200px'
             }} alt='collection image'/>
-            <p>{description}</p>
-            <span>{price}</span>
-            <button onClick={() => handleAddToCart(id)}>Add to Cart</button>
+            <p>{collection.description}</p>
+            <span>{collection.price}</span>
+            <button onClick={handleAddToCart}>Add to Cart</button>
         </div>
     )
 }

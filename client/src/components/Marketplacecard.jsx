@@ -4,7 +4,7 @@ import MarketplaceCollectionCard from './MarketplaceCollectionCard.jsx'
 function Marketplacecard({user}){
 
     const { collections } = useOutletContext()
-    const mappedCollections = user.items.map(collection => <MarketplaceCollectionCard key={collection.id} id={collection.id} description={collection.description} price={collection.price} img_url={collection.img_url} />)
+    const mappedCollections = user.items.map(collection => <MarketplaceCollectionCard key={collection.id} collection = {collection} />)
     
     return (
         <div>
