@@ -17,7 +17,7 @@ function handleSubmit(e){
             "Content-Type": "application/json"
 
         },
-        body: JSON.stringify({"username": username, "password": password, "email_address":'123@email.com', "phone_number":213232423, "age": 17 })
+        body: JSON.stringify({username, password})
     })
     .then (res =>{
         if(res.ok ){

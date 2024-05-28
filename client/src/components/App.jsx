@@ -9,6 +9,18 @@ function App() {
   const [cartItems, setCartItems] =useState([])
 
 
+  useEffect( () => {
+    fetch('/api/check_session')
+    .then(response => {
+      if (response.status === 200) {
+        response.json()
+        .then(loggedUser => setCurrentUser(loggedUser))
+      }
+    }
+    )
+  }, [])
+
+
   useEffect(()=>{
       fetch("http://localhost:3000/collections")
       .then(res => res.json())

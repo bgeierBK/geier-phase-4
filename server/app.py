@@ -108,7 +108,7 @@ def add_user():
             phone_number=request.json.get('phone_number'),
             age=request.json.get('age')
             )
-        new_user.hashed_password = request.json['password']
+        new_user._hashed_password = request.json['password']
         db.session.add(new_user)
         db.session.commit()
         return new_user.to_dict(), 201
