@@ -54,4 +54,6 @@ jspm_packages
 */*.db
 */*/*.db
 
+# Pycache garbage
+*/__pycache__/
 __pycache__/
