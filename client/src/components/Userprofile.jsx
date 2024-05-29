@@ -44,11 +44,31 @@ function Userprofile(){
         setImage('')
 
     }
+    function handleBadge (b) {
+        fetch(`/api/user-badge/${b.id}`,{
+            method: 'PATCH',
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
+            },
+            body: JSON.stringify({
+                display: !b.display
+            })
+        })
+        .then(r=>r.json())
+        .then(newBadge=>{
+            setCurrentUser({
+                ...currentUser,
+                user_badge: currentUser.user_badge.map(b=>b.id === newBadge.id? newBadge : b)
+            })
+        })
+    }
     
-
     return (
         <div id="userprofile">
-            <h1> Welcome {currentUser.username} {currentUser.badges.map(badge=>badge.name).join(", ")}</h1>
+            <h1> Welcome {currentUser.username} {currentUser.user_badge.map((b, i)=>b.display?
+                <img key={i} src={b.badge.src} height={30} onClick={() =>handleBadge(b)}/>:
+                <button key={i} onClick={() =>handleBadge(b)}>Show</button>)}</h1>
             <button id="logout-btn" onClick={handleLogout}>Log out</button>
             <br></br>
             <div id="usercollectioncard-c">
