@@ -45,15 +45,8 @@ function MarketplaceCollectionCard({ collection}){
     }
 
     return (
-        <div style={{
-            display: 'flex',
-            flexWrap: 'wrap',
-            flexDirection: 'column'
-        }}>
-            <img src={collection.img_url} style={{
-                width: '200px',
-                height: '200px'
-            }} alt='collection image'/>
+        <div id="marketplaceCollectionCard">
+            <img src={img_url} alt='collection image'/>
             <p>{collection.description}</p>
             <span>{collection.price}</span>
             <button onClick={handleAddToCart}>Add to Cart</button>

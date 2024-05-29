@@ -53,7 +53,10 @@ function Cart(){
     }
     return (
         <div>
-            {currentUser.cart[0].items.map(item => <Collectioncard key={item.id} id={item.id} description={item.description} price={item.price} img_url={item.img_url} onDelete={onDelete} />)}
+            <h2 id="cartheader">Your Cart</h2>
+            <div id="cart">
+                {currentUser.cart[0].items.map(item => <Collectioncard key={item.id} id={item.id} description={item.description} price={item.price} img_url={item.img_url} onDelete={onDelete} />)}
+            </div>
         </div>
     )
 }

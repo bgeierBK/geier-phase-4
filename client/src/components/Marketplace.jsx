@@ -11,13 +11,8 @@ function Marketplace(){
     const mappedUsers = filteredUsers.map(user => <Marketplacecard key={user.id} user={user} />)
     return (
         <div>
-            <h1>Marketplace</h1>
-            <div style={{
-                display: 'flex',
-                flexWrap: 'wrap',
-                flexDirection: 'column',
-                gap: '10px'
-            }}>
+            <h1 id="marktheader">MARKETPLACE</h1>
+            <div>
                 {mappedUsers}
             </div>
         </div>
