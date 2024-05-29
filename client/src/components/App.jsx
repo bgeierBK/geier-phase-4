@@ -46,9 +46,7 @@ function App() {
  
       <h1 id="header">Collector Market</h1>
         <Navbar/>
-        {/* <br />
-        <br /> */}
-      <Outlet context={{collections:collections, setCollections: setCollections, users: users, currentUser:currentUser, setCurrentUser:setCurrentUser, cartItems: cartItems, setCartItems: setCartItems, handleAddToCart: handleAddToCart}} />
+      <Outlet context={{collections:collections, setCollections: setCollections, users: users, setUsers: setUsers, currentUser:currentUser, setCurrentUser:setCurrentUser, cartItems: cartItems, setCartItems: setCartItems, handleAddToCart: handleAddToCart}} />
      
     </div>
   )
