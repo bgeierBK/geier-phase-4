@@ -48,7 +48,7 @@ function Userprofile(){
 
     return (
         <div id="userprofile">
-            <h1> Welcome {currentUser.username} </h1>
+            <h1> Welcome {currentUser.username} {currentUser.badges.map(badge=>badge.name).join(", ")}</h1>
             <button id="logout-btn" onClick={handleLogout}>Log out</button>
             <br></br>
             <div id="usercollectioncard-c">
