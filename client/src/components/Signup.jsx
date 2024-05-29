@@ -30,20 +30,7 @@ function handleSubmit(e){
 
 }
  
-    return(
-        <div>
-            <h2>Sign up</h2>
-            <form onSubmit={handleSubmit} style={{
-                display: 'flex',
-                flexWrap: 'wrap',
-                flexDirection: 'column'
-            }}>
-                <input onChange ={e => setUsername(e.target.value)} type="'text" name="username" placeholder="username" value={username} />
-                <input onChange ={e => setPassword(e.target.value)} type="password" name="password" placeholder="password" value={password}/>
-                <input type="submit" name="submit" value='Sign up'/>
-            </form>
-        </div>
-)
+   
 }
 
 export default Signup

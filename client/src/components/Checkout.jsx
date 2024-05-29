@@ -69,7 +69,7 @@ function Checkout(){
     return (<h1> Your Cart is Empty!</h1>)}
   else{
   return (
-    <div>
+    <div id="checkout">
       <h2>Checkout Form</h2>
       <form onSubmit={handleSubmit}>
         
@@ -91,13 +91,14 @@ function Checkout(){
 
 
         <h3>Billing Address</h3>
-        <label>
+        <label id="sameas">
+          <p>Same as Shipping Address</p> &nbsp;
           <input type="checkbox" checked={billingSameAsShipping} onChange={handleBillingSameAsShippingChange} />
-          Same as Shipping Address
+          
         </label>
 
         {!billingSameAsShipping && (
-          <div>
+          <form>
             <label htmlFor="billingFullName">Full Name:</label>
             <input type="text" id="billingFullName" name="fullName" value={billingInfo.fullName} onChange={handleBillingChange} required />
 
@@ -112,7 +113,7 @@ function Checkout(){
 
             <label htmlFor="billingZip">Zip Code:</label>
             <input type="text" id="billingZip" name="zip" value={billingInfo.zip} onChange={handleBillingChange} required />
-          </div>
+          </form>
         )}
 
 
@@ -127,7 +128,7 @@ function Checkout(){
         <input type="text" id="cvv" name="cvv" value={paymentInfo.cvv} onChange={handlePaymentChange} required />
         
           
-
+        <br />
         <button type="submit">Place Order</button>
       </form>
     </div>

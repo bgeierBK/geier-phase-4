@@ -2,11 +2,7 @@ function Collectioncard({ img_url, id, price, description, onDelete}){
 
 
     return (
-        <div style={{
-            display: 'flex',
-            flexWrap: 'wrap',
-            flexDirection: 'column'
-        }}>
+        <div id="cartcollectioncard">
             <img src={img_url} style={{
                 width: '200px',
                 height: '200px'
