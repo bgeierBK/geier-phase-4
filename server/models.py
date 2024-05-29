@@ -21,7 +21,7 @@ class User(db.Model, SerializerMixin):
 
     badges = association_proxy('user_badge', 'badge')
 
-    serialize_rules=['-cart.user', '-items.user','-_hashed_password','badges','-badges.users','-user_badge']
+    serialize_rules=['-cart','-user_badge','-_hashed_password','-cart.user','-items.user','-items.cart','badges','-badges.users']
 
     @hybrid_property
     def hashed_password(self):
