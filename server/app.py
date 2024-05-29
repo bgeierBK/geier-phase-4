@@ -212,6 +212,7 @@ def add_badge():
     try:
         new_badge = Badge( 
             name=request.json.get('name'),
+            src=request.json.get('src')
             )
         db.session.add(new_badge)
         db.session.commit()
