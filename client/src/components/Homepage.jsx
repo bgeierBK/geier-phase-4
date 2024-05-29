@@ -9,7 +9,7 @@ function Homepage(){
     if (!currentUser) { 
         return (
     
-            <div className="flex-row">
+            <div className="home">
     
               {/* <Signup setCurrentUser={setCurrentUser}/> */}
               <Login setCurrentUser={setCurrentUser}/>
@@ -21,15 +21,7 @@ function Homepage(){
         } else {
 
     return(
-        <div style={{
-            position: 'absolute',
-            top: '50%',
-            left: '50%',
-            transform: 'translateX(-50%)',
-            display: 'flex',
-            flexWrap: 'wrap',
-            flexDirection: 'row'
-        }}>
+        <div>
             <Userprofile/>
         </div>
     )

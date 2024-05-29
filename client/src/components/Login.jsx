@@ -51,36 +51,30 @@ function Login(){
     }
         if (!isClicked) {
             return(
-                <div>
+                <div className="login-div">
                     <h2>Log in</h2>
-                    <form onSubmit = {handleLogin} style={{
-                        display: 'flex',
-                        flexWrap: 'wrap',
-                        flexDirection: 'column'
-                    }}>
-                        <input onChange ={e => setUsername(e.target.value)} type="'text" name="username" placeholder="username" value={username}/>
-                        <input onChange ={e => setPassword(e.target.value)}type="password" name="password" placeholder="password" value={password}/>
-                        <input type="submit" name="submit" value='Log in'/>
+                    <form onSubmit = {handleLogin} >
+                        <input onChange ={e => setUsername(e.target.value)} type="'text" name="username" placeholder="Username" value={username}/>
+                        <input onChange ={e => setPassword(e.target.value)}type="password" name="password" placeholder="Password" value={password}/>
+                        <button className="login-btn" type="submit" name="submit">Log in</button>
                     </form>
-                    <div> Don't have an account?
+                    <br />
+                    <div> Don't have an account?&nbsp;
                         <a onClick={e => setIsClicked(!isClicked)} href="#">create one here</a>
                     </div>
                 </div>
             )
         } else {
             return(
-                <div>
+                <div className="login-div">
                     <h2>Sign up</h2>
-                    <form onSubmit={handleSignup} style={{
-                        display: 'flex',
-                        flexWrap: 'wrap',
-                        flexDirection: 'column'
-                    }}>
-                        <input onChange ={e => setUsername(e.target.value)} type="'text" name="username" placeholder="username" value={username} />
-                        <input onChange ={e => setPassword(e.target.value)} type="password" name="password" placeholder="password" value={password}/>
-                        <input type="submit" name="submit" value='Sign up'/>
+                    <form onSubmit={handleSignup} >
+                        <input onChange ={e => setUsername(e.target.value)} type="'text" name="username" placeholder="Username" value={username} />
+                        <input onChange ={e => setPassword(e.target.value)} type="password" name="password" placeholder="Password" value={password}/>
+                        <button className="login-btn" type="submit" name="submit">Sign up</button>
                     </form>
-                    <div> Log in
+                    <br />
+                    <div> Log in &nbsp;
                         <a onClick={e => setIsClicked(!isClicked)} href="#">click here</a>
                     </div>
                 </div>
