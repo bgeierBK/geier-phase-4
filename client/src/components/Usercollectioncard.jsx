@@ -10,11 +10,7 @@ function handledelete(){
     })
 }
     return (
-        <div style={{
-            display: 'flex',
-            flexWrap: 'wrap',
-            flexDirection: 'column'
-        }}>
+        <div id="usercollectioncard">
             <img src={img_url} style={{
                 width: '200px',
                 height: '200px'
