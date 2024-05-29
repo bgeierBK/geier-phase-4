@@ -50,7 +50,7 @@ function App() {
         color: '#333'
       }}>Collector Market</h1>
         <Navbar/>
-      <Outlet context={{collections:collections, setCollections: setCollections, users: users, currentUser:currentUser, setCurrentUser:setCurrentUser, cartItems: cartItems, setCartItems: setCartItems, handleAddToCart: handleAddToCart}} />
+      <Outlet context={{collections:collections, setCollections: setCollections, users: users, setUsers: setUsers, currentUser:currentUser, setCurrentUser:setCurrentUser, cartItems: cartItems, setCartItems: setCartItems, handleAddToCart: handleAddToCart}} />
      
     </div>
   )

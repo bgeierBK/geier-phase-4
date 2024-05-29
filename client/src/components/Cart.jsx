@@ -4,42 +4,56 @@ import { useOutletContext } from "react-router-dom";
 
 function Cart(){
 
-    const { cartItems, setCartItems } = useOutletContext()
-
-    console.log(cartItems)
+    const { currentUser, setCurrentUser, setUsers } = useOutletContext()
 
     function onDelete(id) {
-        let itemRemoved = false; 
-        const updatedCartItems = cartItems.filter(item => { 
-
-            if (item.id === id && !itemRemoved) {
-                itemRemoved = true; 
-                return false; 
-            }
-            return true; 
-        });
-        setCartItems(updatedCartItems); 
+        fetch(`/api/items/${id}`,{
+            method : 'PATCH',
+            headers: {
+                "Content-Type": "application/json",
+                "Accept": "application/json"
+            },
+            body: JSON.stringify({item_cart_id: null})
+        })
+        .then(r => r.json())
+        .then(revised_item => {
+            setCurrentUser({
+                ...currentUser,
+                cart: [{
+                    ...currentUser.cart[0],
+                    items: [
+                        ...currentUser.cart[0].items.filter(item => item.id !== revised_item.id)
+                    ]
+                }]
+            })
+            setUsers(users=> users.map(user => {
+                if(user.id == revised_item.item_user_id){
+                    return {
+                        ...user,
+                        items: [
+                            ...user.items.map(item => {
+                                if (item.id == revised_item.id){
+                                    return revised_item
+                                }
+                                return item
+                            })
+                        ]
+                    }
+                }
+                return user
+            }))
+        })
     }
-    //New array for items
-    const updatedItems = cartItems.reduce((acc, item) => {
-        const existingItem = acc.find(accItem => accItem.id === item.id);
-    if (existingItem) {
-    // If the item is already in acc, update its price and count
-        existingItem.price += item.price;
-        existingItem.count++;
-    } else {
-    // If the item is not in acc, add it
-        acc.push({ ...item});
+    if (currentUser == null){
+        return "Not Logged In"
     }
-    return acc;
-    }, []);
 
-    if (cartItems == "") {
+    if (currentUser.cart[0].items.length === 0) {
         return (<h1>Your cart is empty!</h1>)
     }
     return (
         <div>
-            {updatedItems.map(item => <Collectioncard key={item.id} id={item.id} description={item.description} price={item.price} img_url={item.img_url} onDelete={onDelete} />)}
+            {currentUser.cart[0].items.map(item => <Collectioncard key={item.id} id={item.id} description={item.description} price={item.price} img_url={item.img_url} onDelete={onDelete} />)}
         </div>
     )
 }
