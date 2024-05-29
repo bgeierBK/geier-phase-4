@@ -3,7 +3,7 @@ import React from "react"
 import { useOutletContext } from "react-router-dom";
 
 function Checkout(){
-    const {cartItems} = useOutletContext()
+    const {currentUser} = useOutletContext()
 
     const [shippingInfo, setShippingInfo] = useState({
         fullName: '',
@@ -65,7 +65,10 @@ function Checkout(){
     
     console.log('Form submitted:', { shippingInfo, billingInfo, paymentInfo });
   };
-  if (cartItems =='' ){
+  if (currentUser == null){
+    return "Not Logged In"
+  }
+  if (currentUser.cart[0].items.length === 0){
     return (<h1> Your Cart is Empty!</h1>)}
   else{
   return (
