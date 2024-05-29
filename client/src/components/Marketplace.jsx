@@ -3,8 +3,8 @@ import Marketplacecard from './Marketplacecard.jsx'
 
 function Marketplace(){
 
-    const { users } = useOutletContext()
-    const filteredUsers = users.filter(user => user.items.length > 0)
+    const { users, currentUser } = useOutletContext()
+    const filteredUsers = users.filter(user => user.items.length > 0 && user.id !== currentUser.id)
     const mappedUsers = filteredUsers.map(user => <Marketplacecard key={user.id} user={user} />)
     return (
         <div>

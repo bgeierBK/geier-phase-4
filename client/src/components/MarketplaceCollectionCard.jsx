@@ -2,7 +2,7 @@ import { useOutletContext } from "react-router-dom"
 
 function MarketplaceCollectionCard({ collection}){
 
-    const { currentUser,setCurrentUser } = useOutletContext()
+    const { currentUser,setCurrentUser, setUsers } = useOutletContext()
 
     function handleAddToCart(){
         fetch(`/api/items/${collection.id}`,{
@@ -14,16 +14,34 @@ function MarketplaceCollectionCard({ collection}){
             body: JSON.stringify({item_cart_id: currentUser.id})
         })
         .then(r=>r.json())
-        .then(item => setCurrentUser({
+        .then(revised_item => {
+            setCurrentUser({
                 ...currentUser,
                 cart: [{
                     ...currentUser.cart[0],
                     items: [
-                        item,
+                        revised_item,
                         ...currentUser.cart[0].items
                     ]
                 }]
-        }))
+            })
+            setUsers(users=> users.map(user => {
+                if(user.id == revised_item.item_user_id){
+                    return {
+                        ...user,
+                        items: [
+                            ...user.items.map(item => {
+                                if (item.id == revised_item.id){
+                                    return revised_item
+                                }
+                                return item
+                            })
+                        ]
+                    }
+                }
+                return user
+            }))
+        })
     }
 
     return (

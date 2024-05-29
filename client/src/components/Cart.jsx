@@ -4,7 +4,7 @@ import { useOutletContext } from "react-router-dom";
 
 function Cart(){
 
-    const { currentUser, setCurrentUser } = useOutletContext()
+    const { currentUser, setCurrentUser, setUsers } = useOutletContext()
 
     function onDelete(id) {
         fetch(`/api/items/${id}`,{
@@ -16,15 +16,33 @@ function Cart(){
             body: JSON.stringify({item_cart_id: null})
         })
         .then(r => r.json())
-        .then(revised_item => setCurrentUser({
-            ...currentUser,
-            cart: [{
-                ...currentUser.cart[0],
-                items: [
-                    ...currentUser.cart[0].items.filter(item => item.id !== revised_item.id)
-                ]
-            }]
-        }))
+        .then(revised_item => {
+            setCurrentUser({
+                ...currentUser,
+                cart: [{
+                    ...currentUser.cart[0],
+                    items: [
+                        ...currentUser.cart[0].items.filter(item => item.id !== revised_item.id)
+                    ]
+                }]
+            })
+            setUsers(users=> users.map(user => {
+                if(user.id == revised_item.item_user_id){
+                    return {
+                        ...user,
+                        items: [
+                            ...user.items.map(item => {
+                                if (item.id == revised_item.id){
+                                    return revised_item
+                                }
+                                return item
+                            })
+                        ]
+                    }
+                }
+                return user
+            }))
+        })
     }
     if (currentUser == null){
         return "Not Logged In"
