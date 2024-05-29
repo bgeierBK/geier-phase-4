@@ -46,7 +46,7 @@ function MarketplaceCollectionCard({ collection}){
 
     return (
         <div id="marketplaceCollectionCard">
-            <img src={img_url} alt='collection image'/>
+            <img src={collection.img_url} alt='collection image'/>
             <p>{collection.description}</p>
             <span>{collection.price}</span>
             <button onClick={handleAddToCart}>Add to Cart</button>

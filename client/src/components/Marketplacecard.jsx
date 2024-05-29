@@ -7,9 +7,10 @@ function Marketplacecard({user}){
     if (mappedCollections.length){
       return (
           <div id="marketplace">
-              <h1>{user.username.toUpperCase()}</h1>
-              <div id="marketplacecard">
-                  {mappedCollections}
+                <h1>{user.username.toUpperCase()}</h1>
+                <div id="marketplacecard">
+                    {mappedCollections}
+                </div>
            </div>
         )
     }
