@@ -5,9 +5,8 @@ import { useState } from 'react'
 function Userprofile(){
 
     const {currentUser, setCurrentUser} = useOutletContext()
-    const [ userItems, setUserItems ] = useState(currentUser.items)
 
-    const mappedCollections = userItems.map(collection => <Usercollectioncard key={collection.id} id={collection.id} description={collection.description} price={collection.price} img_url={collection.img_url} userItems={userItems} setUserItems={setUserItems} />)
+    const mappedCollections = currentUser.items.map(collection => <Usercollectioncard key={collection.id} id={collection.id} description={collection.description} price={collection.price} img_url={collection.img_url} currentUser={currentUser} setCurrentUser={setCurrentUser} />)
 
     function handleLogout(){
         setCurrentUser(null)
@@ -37,7 +36,7 @@ function Userprofile(){
             })
         })
         .then(res => res.json())
-        .then(newItem => setUserItems([...userItems, newItem]))
+        .then(newItem => setCurrentUser({...currentUser,items: [...currentUser.items, newItem]}))
         setName('')
         setDescription('')
         setPrice(0)

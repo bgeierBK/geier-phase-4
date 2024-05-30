@@ -1,10 +1,10 @@
 import { useOutletContext } from "react-router-dom"
 
-function Usercollectioncard({ img_url, id, price, description, userItems, setUserItems}){
+function Usercollectioncard({ img_url, id, price, description, currentUser, setCurrentUser}){
 
 function handledelete(){
-    const updatedCollections = userItems.filter(collection => collection.id !== id)
-    setUserItems(updatedCollections)
+    const updatedCollections = currentUser.items.filter(collection => collection.id !== id)
+    setCurrentUser({...currentUser,items:updatedCollections})
     fetch(`/api/items/${id}`, {
         method: 'DELETE',
     })
