@@ -121,9 +121,9 @@ if __name__ == '__main__':
         db.session.add_all(items)
         db.session.commit()
      
-        b = Badge(name="Buying Items")
+        b = Badge(name="Buying Items", src="./images/badge1.png")
         badges.append(b)
-        b = Badge(name="Selling Items")
+        b = Badge(name="Selling Items", src="./images/badge2.png")
         badges.append(b)
 
         db.session.add_all(badges)
