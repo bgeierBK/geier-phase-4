@@ -44,7 +44,7 @@ function App() {
 
     <div className='App'>
  
-      <h1 id="header">Collector Market</h1>
+      <h1 id="header">Collectible Corner</h1>
         <Navbar/>
       <Outlet context={{collections:collections, setCollections: setCollections, users: users, setUsers: setUsers, currentUser:currentUser, setCurrentUser:setCurrentUser, cartItems: cartItems, setCartItems: setCartItems, handleAddToCart: handleAddToCart}} />
      

@@ -62,8 +62,30 @@ function Checkout(){
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    
+    alert('Payment has been submitted successfully!');
     console.log('Form submitted:', { shippingInfo, billingInfo, paymentInfo });
+          
+        setShippingInfo({
+            fullName: '',
+            address: '',
+            city: '',
+            state: '',
+            zip: ''
+          });
+        setBillingInfo({
+            fullName: '',
+            address: '',
+            city: '',
+            state: '',
+            zip: ''
+        });
+        setPaymentInfo({
+            cardNumber: '',
+            expiryDate: '',
+            cvv: ''
+        });
+        setBillingSameAsShipping(false);
+          
   };
   if (currentUser == null){
     return "Not Logged In"
@@ -125,7 +147,7 @@ function Checkout(){
         <input type="text" id="cardNumber" name="cardNumber" value={paymentInfo.cardNumber} onChange={handlePaymentChange} required />
        
         <label htmlFor="expiryDate">Expiration Date:</label>
-        <input type="text" id="expiryDate" name="expiryDate" value={paymentInfo.expiryDate} onChange={handlePaymentChange} required />
+        <input type="date" id="expiryDate" name="expiryDate" value={paymentInfo.expiryDate} onChange={handlePaymentChange} required />
         
         <label htmlFor="cvv">CVV:</label>
         <input type="text" id="cvv" name="cvv" value={paymentInfo.cvv} onChange={handlePaymentChange} required />

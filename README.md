@@ -1,66 +1,94 @@
-# Phase 4 Project Template
 
-## Getting Started - Git & Github
 
-Elect one person to clone (DON'T FORK) this project to their local computer. That person will then run this command:
+![alt text](client/images/action-figure.png)![alt text](client/images/logo.png)
 
-```
-git remote remove origin
-```
+## Table of Contents <a name="table-of-contents"></a>
 
-Navigate to github and create a new public repository, choose not to add a README, license, or any additional information. Once the empty repo has been created, follow the directions to upload an existing repository.
+- [Project Description](#project-description)
+- [Features](#features)
+- [Tech StacK](#tech_stack)
+- [Installation](#installation)
+- [Contact](#contact)
 
-Add your collaborators under `Settings > Collaborators` on github.
 
-## Getting Started - Flask
 
-Inside the project run these commands:
+## Project Description <a name="project-description"></a>
 
-```
-pipenv install
-pipenv shell
-cd server
-```
+Collectible Corner is an e-commerce platform where users can buy and sell their own collectibles and memorabilia. This project was built using SQLFlask for the backend and React for the frontend 
 
-Begin by building your first model. From there:
+## Features <a name="features"></a>
 
-```
-flask db init
-flask db migrate -m "example migration message"
-flask db upgrade
-```
+- User authentication and authorization
+- The ability to sign-up with your own user name and password
+- Login with said username and password 
+- User has its own profile where they can see their collectibles as well as have badges that identify if they are seller  or buyer
+- User can Add or Delete listing in profile
+- A Marketplace where Users and their for sale items are listed
+- User has ability to add/delete items from marketplace to cart
+- User can fill out payment info once they are ready to checkout
 
-Any additional changes you make will only need the `flask db migrate -m "example migration message"` and `flask db upgrade`. It's recommended you build one model at a time to catch errors more easily.
+## Tech Stack <a name="tech_stack"></a>
 
-Once your database has been upgraded you may run the server with:
+- Backend: Flask, SQLAlchemy, RESTful APIs
+- Frontend: React
 
-```
-python app.py
-```
+## Installation <a name="installation"></a>
+## Prerequisites
 
-In order to follow best practices with the React server proxy, begin all your route URLs with `/api` (for example `/api/users` for users route).
+- vite 5.2.0+
+- python 3.7+
+- React Router Dom
 
-A seed file has been provided under `seed.py`. To run the seed file:
+## General Setup
 
-```
-python seed.py
-```
+Fork and Clone via git hub
 
-## Getting Started - React
+run in console
+- git clone https://github.com/yourusername/phase4-project.git
 
-The `client` directory contains a React template built by Vite, however you may replace it with one built by `create-react-app` or any other tool if you wish.
+- cd phase4-project
+- code .
 
-At the end of any command using `npm`, append `--prefix client` so that it properly uses the `client` directory or else be sure to `cd client` beforehand.
+## Frontend Setup
 
-To start your React server, run:
+to install vite
+- npm install --prefix client
 
-```
-npm install --prefix client
-npm run dev --prefix client
-```
+to run the frontend 
+- npm run dev --prefix client
 
-When making fetch requests, leave out the `localhost:5555` portion since a proxy already exists to that domain and instead prefix every request with `/api` to properly utilize the proxy request feature.
+## Backend Setup
 
-## Conclusion
+to install dependencies 
 
-Once you've completed work on this project, replace this README with one of your own devising!
+- pipenv install 
+- pipenv shell 
+
+move to server
+- cd server
+
+to run the server 
+
+-python app.py
+
+## Setup Database & Seed
+** please be aware you need to be in server so do not forget
+
+- flask db init
+- flask db migrate -m "Initial migration."
+- flask db upgrade
+
+to seed the database 
+- python seed.py
+
+## Contact The Devs <a name="contact"></a>
+
+
+- Annania Plossl [GitHub](https://github.com/PenguinPerson1)
+- Ben Geier  [GitHub](https://github.com/bgeierBK)
+- Ahmed Basamad [GitHub](https://github.com/Truthseeker01)
+- Victor Cardenas [GitHub](https://github.com/VC2324)
+
+
+
+
