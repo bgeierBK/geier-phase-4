@@ -259,12 +259,6 @@ h1{
   color: #fff;
 }
 
-#checkout h2{
-  background-color: rgb(0, 0, 0);
-  width: 100%;
-  text-align: center;
-}
-
 #checkout form{
   display: flex;
   flex-direction: column;
@@ -280,6 +274,15 @@ h1{
   background-color: rgb(255, 0, 0), 0.7;
   width: 400px;
   height: 30px;
+}
+
+#checkoutheader{
+  text-align: center;
+  background: transparent;
+  text-transform: uppercase;
+  width: 100%;
+  color: #fff;
+  border-bottom: 1.5px solid #fff;
 }
 
 #sameas{
