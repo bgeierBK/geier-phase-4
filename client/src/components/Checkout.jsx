@@ -95,7 +95,7 @@ function Checkout(){
   else{
   return (
     <div id="checkout">
-      <h2>Checkout Form</h2>
+      <h2 id='checkoutheader'>Checkout</h2>
       <form onSubmit={handleSubmit}>
         
         <h3>Shipping Address</h3>
