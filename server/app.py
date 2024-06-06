@@ -1,14 +1,16 @@
 #!/usr/bin/env python3
 
-from flask import request, session
+from flask import request, session, render_template
 
 from config import app, bcrypt
 from models import db, User, Cart, Item, Badge, UserBadge # import your models here!
 
 
-@app.get('/')
-def index():
-    return "Hello world"
+
+@app.errorhandler(404)
+def not_found(e):
+    return render_template("index.html")
+
 
 @app.post("/api/signup")
 def signup():
